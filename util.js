@@ -9,7 +9,7 @@ const parseDomain = (domain) => {
 };
 
 const getPortForSubdomain = (subdomain) => {
-  return config[subdomain] ? (config[subdomain] == 0 ? 0 : -1) : -1;
+  return config[subdomain] || config[subdomain] == 0 ? 0 : -1;
 };
 
 const sendJSON = (res, statusCode, data) => {
