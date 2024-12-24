@@ -12,7 +12,8 @@
   "license": "ISC",
   "description": "Proxy server for your un-\"web server\"-ed server!",
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "http-proxy": "^1.18.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

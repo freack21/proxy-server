@@ -28,10 +28,10 @@ function getPortForSubdomain(subdomain) {
 }
 
 const server = https.createServer(sslOptions, (req, res) => {
-  const myDomain = process.env.DOMAINS.split(".").join("\\.");
+  const myDomain = process.env.DOMAIN.split(".").join("\\.");
   const regex = new RegExp(`^([a-zA-Z0-9-]+)\\.${myDomain}$`);
 
-  const host = req.headers.host;
+  const host = req.headers.host || "";
   const match = host.match(regex);
 
   const subdomain = match ? match[1] : "";
