@@ -1,4 +1,4 @@
-const { queryToJSON, loadConfig, setConfigValue } = require("../util");
+const { queryToJSON, loadConfig, setConfigValue, sendJSON } = require("../util");
 
 const config = (req, res) => {
   let CONFIG = loadConfig();

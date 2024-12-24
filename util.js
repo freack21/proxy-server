@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const CONFIG_PATH = path.join(__dirname, "./config.json");
-let CONFIG = loadConfig();
 
 const loadConfig = () => {
   try {
@@ -11,6 +10,8 @@ const loadConfig = () => {
     return {};
   }
 };
+
+let CONFIG = loadConfig();
 
 const setConfigValue = (key, value) => {
   const CONFIG_VARS = loadConfig();
