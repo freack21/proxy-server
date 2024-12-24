@@ -13,6 +13,7 @@ const {
   sendJSON,
   redirect,
 } = require("./util");
+const routing = require("./route");
 
 const sslOptions = {
   key: fs.readFileSync(
@@ -31,11 +32,11 @@ const server = https.createServer(sslOptions, (req, res) => {
 
   if (port === -1) {
     return sendJSON(res, 404, { msg: "Not Found" });
-  } else if (port === 0) {
-    return sendJSON(res, 200, { msg: "Hello World" });
+  } else if (port != 0) {
+    proxy.web(req, res, { target: `http://127.0.0.1:${port}` });
   }
 
-  proxy.web(req, res, { target: `http://127.0.0.1:${port}` });
+  routing(req, res);
 });
 
 server.listen(443, () => {
