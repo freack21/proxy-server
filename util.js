@@ -1,14 +1,15 @@
 const config = require("./config");
 
 const parseDomain = (domain) => {
-  const regex = /^(?:(\w+)\.)?(\w+)/;
+  const superDomain = process.env.DOMAIN.split(".").slice(1).join(".");
+  const regex = new RegExp(`^(?:(\\w+)\\.)?(\\w+)\\.${superDomain}$`);
   const match = domain.match(regex) || [];
 
   return match[1] || match[2] || "";
 };
 
 const getPortForSubdomain = (subdomain) => {
-  return config[subdomain] || -1;
+  return config[subdomain] ? (config[subdomain] == 0 ? 0 : -1) : -1;
 };
 
 const sendJSON = (res, statusCode, data) => {
