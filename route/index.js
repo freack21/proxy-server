@@ -3,7 +3,8 @@ const config = require("./config");
 
 const routing = (req, res) => {
   const url = req.url;
-  switch (url) {
+  const path = url.split("?")[0];
+  switch (path) {
     case "/":
       sendJSON(res, 200, { msg: "Welcome to Reserve Proxy Server!" });
       break;
