@@ -1,7 +1,7 @@
 const config = require("./config");
 
 const parseDomain = (domain) => {
-  const regex = /^(?:(\w+)\.)?(\w+)\.(\w+)$/;
+  const regex = /^(?:(\w+)\.)?(\w+)/;
   const match = domain.match(regex) || [];
 
   return match[1] || match[2] || "";
