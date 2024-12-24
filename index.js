@@ -18,10 +18,17 @@ const sslOptions = {
 
 const proxy = httpProxy.createProxyServer({});
 
-function getPortForSubdomain(subdomain) {
+function getPortForSubdomain(subdomain, firstDomain) {
+  const myFirstDomain = process.env.DOMAIN.split(".")[0];
+  if (firstDomain == myFirstDomain) {
+    return 0;
+  }
+
   switch (subdomain) {
     case "moviepass":
       return 3200;
+    case "www":
+      return 0;
     default:
       return -1;
   }
@@ -35,12 +42,17 @@ const server = https.createServer(sslOptions, (req, res) => {
   const match = host.match(regex);
 
   const subdomain = match ? match[1] : "";
+  const firstDomain = host.split(".")[0];
 
-  const port = getPortForSubdomain(subdomain);
+  const port = getPortForSubdomain(subdomain, firstDomain);
 
   if (port === -1) {
-    res.writeHead(404, { "Content-Type": "text/plain" });
-    res.end("404 | Not Found");
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end({ msg: "Not Found" });
+    return;
+  } else if (port === 0) {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end({ msg: "Hello World" });
     return;
   }
 
