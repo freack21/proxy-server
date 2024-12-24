@@ -20,8 +20,9 @@ const config = (req, res) => {
       delete data.act;
 
       for (const key in data) {
-        if (isNaN(Number(data[key])) || data[key] < 0) continue;
-        setConfigValue(key, data[key]);
+        const port = Number(data[key]);
+        if (isNaN(port) || port < 0) continue;
+        setConfigValue(key, port);
       }
 
       return sendJSON(res, 200, CONFIG);
