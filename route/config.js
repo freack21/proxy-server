@@ -25,7 +25,7 @@ const config = (req, res) => {
         setConfigValue(key, port);
       }
 
-      return sendJSON(res, 200, CONFIG);
+      return sendJSON(res, 200, loadConfig());
     }
   } else {
   }
